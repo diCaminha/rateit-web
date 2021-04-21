@@ -6,6 +6,13 @@ import MovieList from "./components/movie-list";
 
 const App = () => {
   const [movies, setMovies] = useState([]);
+  const [movieSelected, setMovieSelected] = useState(null);
+
+
+  const onMovieClicked = (movie) => {
+    console.log(movie);
+    setMovieSelected(movie);
+  }
 
   useEffect(() => {
     async function getMovies() {
@@ -18,7 +25,7 @@ const App = () => {
 
   return (
     <Layout>
-      <MovieList movies={movies}/>
+      <MovieList movies={movies} movieClicked={onMovieClicked}/>
     </Layout>
   );
 };
