@@ -1,12 +1,13 @@
-import './App.css';
+import "./App.css";
+import Layout from "./components/Layout";
 
-function App() {
+
+const App = () => {
+
   return (
-    <div className="App">
-      <header className="App-header">
-      <h1>Rate It</h1>
-      </header>
-    </div>
+    <Layout>
+      <h1>Home</h1>
+    </Layout>
   );
 }
 
