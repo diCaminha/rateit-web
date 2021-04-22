@@ -19,7 +19,9 @@ const App = () => {
   }, []);
 
   const onMovieClicked = async (movie) => {
-    const result = await axios.get(`http://localhost:8000/api/movies/${movie.id}`);
+    const result = await axios.get(
+      `http://localhost:8000/api/movies/${movie.id}`
+    );
     setMovieSelected(result.data);
   };
 
@@ -27,7 +29,7 @@ const App = () => {
     <Layout>
       <MovieList movies={movies} movieClicked={onMovieClicked} />
       {movieSelected ? (
-        <MovieDetail movie={movieSelected} />
+        <MovieDetail movie={movieSelected} updateSelectedMovie={onMovieClicked}/>
       ) : (
         <h2>Selecione um filme</h2>
       )}
