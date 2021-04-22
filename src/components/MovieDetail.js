@@ -2,6 +2,7 @@ import { Card, CardContent } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { makeStyles } from "@material-ui/styles";
+import React, { useState } from "react";
 
 const useStyles = makeStyles({
   star_full: {
@@ -10,12 +11,23 @@ const useStyles = makeStyles({
   star_empty: {
     color: "gray",
   },
+
+  rate_container: {
+    borderTop: "20px solid purple",
+    marginTop: "20px",
+  },
 });
 
 const MovieDetail = (props) => {
+  const [highlighted, setHighlighted] = useState(-1);
   const classes = useStyles();
+
+  const highlighteStar = high => evt => {
+    setHighlighted(high);
+  }
+
   return (
-    <div>
+    <React.Fragment>
       {props.movie ? (
         <Card>
           <CardContent>
@@ -62,10 +74,28 @@ const MovieDetail = (props) => {
               }
             />
             ({props.movie ? props.movie.qnt_ratings : 0})
+            <div className={classes.rate_container}>
+              <h2>Rate it</h2>
+              {[...Array(5)].map((e, i) => {
+                return (
+                  <FontAwesomeIcon
+                  key={i}
+                    icon={faStar}
+                    className={
+                      highlighted > i - 1
+                        ? classes.star_full
+                        : classes.star_empty
+                    }
+                    onMouseEnter={highlighteStar(i)}
+                    onMouseLeave={highlighteStar(-1)}
+                  />
+                );
+              })}
+            </div>
           </CardContent>
         </Card>
       ) : null}
-    </div>
+    </React.Fragment>
   );
 };
 
