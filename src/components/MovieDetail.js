@@ -61,6 +61,7 @@ const MovieDetail = (props) => {
                   : classes.star_empty
               }
             />
+            ({props.movie ? props.movie.qnt_ratings : 0})
           </CardContent>
         </Card>
       ) : null}
